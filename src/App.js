@@ -5,14 +5,8 @@ function App() {
   const [cards, setCards] = useState([]);
 
   const getCards = async () => {
-    const deckResponse = await fetch(
-      "https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1"
-    ).then((response) => response.json());
-
-    let deckID = deckResponse.deck_id;
-
     const cardsResponse = await fetch(
-      `https://deckofcardsapi.com/api/deck/${deckID}/draw/?count=12`
+      `https://deckofcardsapi.com/api/deck/new/draw/?count=12`
     ).then((response) => response.json());
 
     setCards(cardsResponse.cards);
@@ -28,7 +22,7 @@ function App() {
     <div className="App">
       <ul>
         {cards.map((card) => (
-          <li key={card.code}><img src={card.image} alt={`${card.suit} OF ${card.value}`} /></li>
+          <li key={card.code}><img src={card.image} alt={`${card.value} OF ${card.suit}`} /></li>
         ))}  
       </ul>
     </div>
