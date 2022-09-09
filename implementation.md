@@ -19,24 +19,26 @@ State representation:
 // App.js
 const [cards, setCards] = useState();
 
+const getCards = async () => {
+  const deckResponse = await fetch(
+    "https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1"
+  ).then((response) => response.json());
+
+  let deckID = deckResponse.deck_id;
+  const cardsResponse = await fetch(
+    `https://deckofcardsapi.com/api/deck/${deckID}/draw/?count=12`
+  ).then((response) => response.json());
+
+  setCards(cardsResponse);
+}
+
 useEffect(() => {
-  const getCards = async () => {
-    const deckResponse = await fetch(
-      "https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1"
-    ).then((response) => response.json());
-
-    let deckID = deckResponse.deck_id;
-    const cardsResponse = await fetch(
-      `https://deckofcardsapi.com/api/deck/${deckID}/draw/?count=12`
-    ).then((response) => response.json());
-
-    setCards(cardsResponse);
-  }
-
   getCards().catch(console.error);
-}, []); // We use the empty array here to run the side effect like a componentDidMount lifecycle
+}, []);
 ```
 
-I think this should load all the card data into the react component.
+I think this should load all the card data into the react component. I think I'm not using the promise properly, as the cards state array is not set by the time the main component hits it.
 
-I think I'm not using the promise properly, as the cards state array is not set by the time the main component hits it.
+I think my issue was that I was not providing a default value for cards, which was causing some issues with it being "undefined" - adding the empty array to `useState` seemed to do the trick.
+
+Now that I have my data, I can move on to the game components.
