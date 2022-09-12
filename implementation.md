@@ -42,3 +42,22 @@ I think this should load all the card data into the react component. I think I'm
 I think my issue was that I was not providing a default value for cards, which was causing some issues with it being "undefined" - adding the empty array to `useState` seemed to do the trick.
 
 Now that I have my data, I can move on to the game components.
+
+# Cards
+So, the card data is sorted now and the next component to build is the "Card" component. I'm currently thinking about how to handle "already guessed" cards. Should the state object for each card have a flag?
+
+Another option is to store the guessed card codes and just check against that to reset the score. I feel this is a little easier because then I don't have to read and adjust the card objects as I go. It's simply a matter of
+
+```
+set up displayArray
+shuffle displayArray
+listen for guess
+on guess
+  does guesses already contain this value?
+    yes, reset score
+    no, add 1 to score
+  add guess to guessStore
+  Shuffle display
+```
+
+I think this way, I can just make a copy of the state array, shuffle it, use it to map and display the card components without worrying about the underlying state detail.
