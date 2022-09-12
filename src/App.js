@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 
 function App() {
   const [cards, setCards] = useState([]);
+  const [cardsGuessed, setCardsGuessed] = useState([]);
 
   const getCards = async () => {
     const cardsResponse = await fetch(
