@@ -1,8 +1,12 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
+import Card from './components/Card';
 
 function App() {
   const [cards, setCards] = useState([]);
+  const [cardsGuessed, setCardsGuessed] = useState([]);
+  const [score, setScore] = useState(0);
+  const [bestScore, setBestScore] = useState(0);
 
   const getCards = async () => {
     const cardsResponse = await fetch(
@@ -22,7 +26,7 @@ function App() {
     <div className="App">
       <ul>
         {cards.map((card) => (
-          <li key={card.code}><img src={card.image} alt={`${card.value} OF ${card.suit}`} /></li>
+          <Card key={card.code} card={card} />
         ))}  
       </ul>
     </div>
