@@ -61,3 +61,11 @@ on guess
 ```
 
 I think this way, I can just make a copy of the state array, shuffle it, use it to map and display the card components without worrying about the underlying state detail.
+
+How do I go about actually doing this?
+
+```js
+<Card onClick={() => setPlayerGuesses(card.code)} />
+```
+
+I'm not sure.
