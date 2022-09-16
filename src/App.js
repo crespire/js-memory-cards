@@ -66,10 +66,10 @@ function App() {
 
   return (
     <div className="App container mx-auto flex flex-col place-self-center">
-      <div className="flex place-content-center">
+      <div className="flex place-content-center p-4">
         <Score score={score} bestScore={bestScore} />
       </div>
-      <div className="container flex place-content-center">
+      <div className="flex place-content-evenly flex-wrap">
         {cards.map((card) => (
           <Card key={card.code} card={card} handleClick={handleClick} />
         ))}
