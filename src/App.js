@@ -16,6 +16,15 @@ function App() {
     setCards(cardsResponse.cards);
   }
 
+  function shuffleDeck(array) {
+    // Durstenfeld/Fisher-Yates shuffle implementation
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
   useEffect(() => {
     getCards().catch(console.error);
   }, []);
@@ -45,7 +54,9 @@ function App() {
       setBestScore(prevBest => {
         return cardsGuessed.length > prevBest ? cardsGuessed.length : prevBest
       });
-
+      setCards(prevDeck => {
+        return shuffleDeck(prevDeck);
+      });
     }
   }, [cardsGuessed]);
 
