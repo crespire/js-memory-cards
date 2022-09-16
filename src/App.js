@@ -63,12 +63,14 @@ function App() {
 
   return (
     <div className="App">
-      <Score score={score} bestScore={bestScore} />
-      <ul>
+      <div className="">
+        <Score score={score} bestScore={bestScore} />
+      </div>
+      <div className="">
         {cards.map((card) => (
           <Card key={card.code} card={card} handleClick={handleClick} />
-        ))}  
-      </ul>
+        ))}
+      </div>
     </div>
   );
 }

@@ -2,9 +2,9 @@ import React from 'react';
 
 function Score(props) {
   return (
-    <div className="">
+    <span>
       Current Score: {props.score} | Best Score: {props.bestScore}
-    </div>
+    </span>
   );
 }
 
