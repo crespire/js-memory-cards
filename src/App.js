@@ -39,16 +39,21 @@ function App() {
     /*
       Consider if useEffect is really needed here, could shovel this all into handleClick.
     */
-    function resetGame() {
+    function resetGame(resetBest = false) {
       console.log('Resetting game...');
       getCards().catch(console.error);
       setCardsGuessed([]);
       setScore(0);
+      if (resetBest) { setBestScore(0) }
     }
 
     const allUnique = cardsGuessed.length === [...new Set(cardsGuessed)].length;
 
-    if (!allUnique) {
+    if (!allUnique || cardsGuessed.length === 12) {
+      if (cardsGuessed.length === 12) {
+        alert('You won!');
+        resetGame(true);
+      }
       resetGame();
     } else {
       setScore(cardsGuessed.length);
