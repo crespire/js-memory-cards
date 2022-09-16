@@ -1,6 +1,7 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import Card from './components/Card';
+import Score from './components/Score';
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -62,6 +63,7 @@ function App() {
 
   return (
     <div className="App">
+      <Score score={score} bestScore={bestScore} />
       <ul>
         {cards.map((card) => (
           <Card key={card.code} card={card} handleClick={handleClick} />
