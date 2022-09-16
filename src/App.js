@@ -22,11 +22,53 @@ function App() {
     getCards().catch(console.error);
   }, [cards]);
 
+  function handleClick(newGuess) {
+    console.log(`Got ${newGuess}`);
+    setCardsGuessed([...cardsGuessed, newGuess]);
+  }
+
+  useEffect(() => {
+    /*
+      Here is where we should do a bunch of core app functionality.
+      Is there a duplicate? If so, reset the game: get new cards, set score to 0.
+      If not, up score by one and call "updateBestScore" function.
+      Shuffle the cards.
+    */
+    function resetGame() {
+      console.log('Resetting game...');
+      getCards().catch(console.error);
+      setCardsGuessed([]);
+      setScore(0);
+      setBestScore(0);
+    }
+  
+    function updateBestScore(score) {
+      if (score === bestScore) {
+        setBestScore(score + 1);
+        console.log(`Best score +1'd`);
+      };
+    }
+
+    const allUnique = cardsGuessed.length === [...new Set(cardsGuessed)].length;
+
+    if (!allUnique) {
+      console.log('Duplicate guess detected, resetting game.');
+      resetGame();
+    } else {
+      console.log(`Updated guesses: ${cardsGuessed}`);
+      console.log('Current score: ', score);
+      console.log('Current best score: ', bestScore);
+      setScore(score + 1);
+      updateBestScore(score);
+    }
+    // eslint-disable-next-line
+  }, [cardsGuessed]);
+
   return (
     <div className="App">
       <ul>
         {cards.map((card) => (
-          <Card key={card.code} card={card} />
+          <Card key={card.code} card={card} handleClick={handleClick} />
         ))}  
       </ul>
     </div>
