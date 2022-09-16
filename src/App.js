@@ -31,7 +31,6 @@ function App() {
   }, []);
 
   function handleClick(newGuess) {
-    console.log(`Got ${newGuess}`);
     setCardsGuessed([...cardsGuessed, newGuess]);
   }
 
@@ -40,7 +39,6 @@ function App() {
       Consider if useEffect is really needed here, could shovel this all into handleClick.
     */
     function resetGame(resetBest = false) {
-      console.log('Resetting game...');
       getCards().catch(console.error);
       setCardsGuessed([]);
       setScore(0);
@@ -67,11 +65,11 @@ function App() {
   }, [cardsGuessed]);
 
   return (
-    <div className="App">
-      <div className="">
+    <div className="App container mx-auto flex flex-col place-self-center">
+      <div className="flex place-content-center">
         <Score score={score} bestScore={bestScore} />
       </div>
-      <div className="">
+      <div className="container flex place-content-center">
         {cards.map((card) => (
           <Card key={card.code} card={card} handleClick={handleClick} />
         ))}
