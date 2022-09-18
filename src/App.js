@@ -48,7 +48,7 @@ function App() {
     const allUnique = cardsGuessed.length === [...new Set(cardsGuessed)].length;
 
     if (!allUnique || cardsGuessed.length === 12) {
-      if (cardsGuessed.length === 12) {
+      if (allUnique) {
         alert('You won!');
         resetGame(true);
       }
