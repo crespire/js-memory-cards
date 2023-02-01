@@ -35,9 +35,6 @@ function App() {
   }
 
   useEffect(() => {
-    /*
-      Consider if useEffect is really needed here, could shovel this all into handleClick.
-    */
     function resetGame(resetBest = false) {
       getCards().catch(console.error);
       setCardsGuessed([]);
